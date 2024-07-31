@@ -11,7 +11,7 @@ from datetime import datetime
 
 app = Flask(__name__, template_folder='src/frontend/templates')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<user>:<password>@localhost/<appname>'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/nutrinotes'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nutrinotes_user:AwAj6lm4pRvOrw3adi3dKgW1Mt4gueq4@dpg-cqlb1hpu0jms7389jmrg-a/nutrinotes'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = 'secret string'
 login_manager = LoginManager()

@@ -11,7 +11,7 @@ from datetime import datetime
 
 app = Flask(__name__, template_folder='src/frontend/templates')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<user>:<password>@localhost/<appname>'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Little12@localhost/nutrinotes'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/nutrinotes'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = 'secret string'
 login_manager = LoginManager()
@@ -118,26 +118,7 @@ def logout_action():
     logout_user()
     return redirect(url_for('login_action'))
 
-#####################################################
 
-# @app.route('/SignUp', methods=['GET', 'POST'])
-# def SignUp():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-#         user = User.query.filter_by(Username=username).first()
-#         #If the user exists and the password for that user matches
-#         if user:
-#             flash('Invalid Username!')
-#             #User has been authenticated and is logged in
-#             return render_template('signup.html')
-#         elif password != "" and user != "":
-#             #User successfully signed up
-#             login_user(user)
-#             #redirect to home
-#             return redirect(url_for('home'))
-        
-#     return render_template('signup.html')
 @app.route('/SignUp')
 def SignUp():
     return render_template('SignUp.html')
@@ -800,24 +781,3 @@ def updategoal(goal_id):
         db.session.rollback()
         return render_template('goals.html', feedback_message=str(err), feedback_type=False)
 
-#VIEW FRIENDS GOALS
-#@app.route('/friendsgoals', methods=['GET'])
-#def friendgoals():
-#    try:
-##        current_user = db.session.query(User).filter(User.Username == current_user.Username).first()
-#        if current_user is None:
-#            return render_template('goals.html', feedback_message='User not found', feedback_type=False)
-#        friends = db.session.query(Friend).filter(Friend.User_ID == current_user.User_ID).all()
-#        friend_ids = [friend.Friend_ID for friend in friends]
-#        
-#        if not friend_ids:
-#            return render_template('goals.html', feedback_message='No friends found', feedback_type=False)
-#      
-#        goals = db.session.query(Goal).filter(Goal.User_ID.in_(friend_ids)).all()
-#        
-#        friends_list = db.session.query(User).filter(User.User_ID.in_(friend_ids)).all()
-#        
-#        return render_template('goals.html', goals=goals, friends=friends_list, current_user=current_user)
-#
-#    except Exception as err:
-#        return render_template('goals.html', feedback_message=str(err), feedback_type=False)
